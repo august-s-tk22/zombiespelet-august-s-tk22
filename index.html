@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KORVBALLE</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <script src="https://koda.nu/simple.js">
+
+        var x = 100;
+        var y = 100;
+
+        catX = 100;
+        catY = 100;
+
+    function update()
+    {
+        clearScreen();
+
+        circle(catX, catY, 30)
+        circle(mouse.x, mouse.y, 15)
+
+            if (keyboard.d)
+            catX += 50;
+
+            if (keyboard.a)
+            catX -= 50;
+
+            if (keyboard.w)
+            catY -= 50;
+
+            if (keyboard.s)
+            catY += 50;
+
+        var d = distance(mouse.x, mouse.y, catX, catY);
+        
+        if (d < 35)
+        {
+            alert("LOLOLLOLOLOLOLOLL DU FÖRLORA AHAHAHQHAHAHAHHAH");
+            stopUpdate();
+        }
+    }
+    </script>
+</body>
+</html>
