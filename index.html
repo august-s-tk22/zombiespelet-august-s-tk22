@@ -4,24 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KORVBALLE</title>
+    <title>sida</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <script src="https://koda.nu/simple.js">
 
-        var x = 100;
-        var y = 100;
+        var catX = 100;
+        var catY = 100;
 
-        catX = 100;
-        catY = 100;
+        hideMouse();
 
     function update()
     {
-        clearScreen();
+        fill("black");
 
-        circle(catX, catY, 30, "black")
-        circle(mouse.x, mouse.y, 15, "orange")
+        picture(catX, catY, "https://cdn-icons-png.flaticon.com/512/2734/2734864.png")
+        picture(mouse.x, mouse.y, "https://upload.wikimedia.org/wikipedia/commons/e/e0/Flag_map_of_Serbia_%28with_Kosovo%29.svg")
 
             if (keyboard.d)
             catX += 50;
@@ -39,7 +38,8 @@
         
         if (d < 40)
         {
-            alert("LOLOLLOLOLOLOLOLL DU FÖRLORA AHAHAHQHAHAHAHHAH");
+            alert("game over");
+            showMouse();
             stopUpdate();
         }
     }
