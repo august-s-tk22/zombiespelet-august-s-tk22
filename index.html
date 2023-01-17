@@ -20,8 +20,8 @@
     {
         clearScreen();
 
-        circle(catX, catY, 30)
-        circle(mouse.x, mouse.y, 15)
+        circle(catX, catY, 30, "black")
+        circle(mouse.x, mouse.y, 15, "orange")
 
             if (keyboard.d)
             catX += 50;
@@ -37,7 +37,7 @@
 
         var d = distance(mouse.x, mouse.y, catX, catY);
         
-        if (d < 35)
+        if (d < 40)
         {
             alert("LOLOLLOLOLOLOLOLL DU FÖRLORA AHAHAHQHAHAHAHHAH");
             stopUpdate();
