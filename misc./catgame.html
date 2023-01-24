@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Game</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <script src="https://koda.nu/simple.js">
+
+        let cat = {x: 100, y: 100, speed: 40};
+
+        hideMouse();
+
+        playSound("file:///Users/aggeskola/Downloads/y2mate.com%20-%20Death%20Grips%20%20Takyon%20Death%20Yon.mp3");
+
+    function update()
+    {
+        fill("gray");
+
+        picture(mouse.x, mouse.y, "https://www.simpleimageresizer.com/_uploads/photos/a6ddc601/poison_50x50.png");
+        picture(cat.x, cat.y, "https://www.simpleimageresizer.com/_uploads/photos/a6ddc601/kitten_50x50.png");
+
+            if (keyboard.d)
+                cat.x += cat.speed;
+
+            if (keyboard.a)
+                cat.x -= cat.speed;
+
+            if (keyboard.w)
+                cat.y -= cat.speed;
+
+            if (keyboard.s)
+                cat.y += cat.speed;
+
+        var d = distance(mouse.x, mouse.y, cat.x, cat.y);
+        
+        if (d < 40)
+
+        {
+            showMouse();
+            stopUpdate();
+            text(50, 25, 25, "You let the kitten get to the cyanide. It died.", "red");
+            playSound("https://spelprogrammering.nu/ljud/effekter/laser_gun_2");
+        }
+    }
+    </script>
+</body>
+</html>

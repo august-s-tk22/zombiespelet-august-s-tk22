@@ -4,45 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sida</title>
+    <title>THA</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <script src="https://koda.nu/simple.js">
 
-        var catX = 100;
-        var catY = 100;
-
-        hideMouse();
-
-    function update()
-    {
-        fill("black");
-
-        picture(catX, catY, "https://cdn-icons-png.flaticon.com/512/2734/2734864.png")
-        picture(mouse.x, mouse.y, "https://upload.wikimedia.org/wikipedia/commons/e/e0/Flag_map_of_Serbia_%28with_Kosovo%29.svg")
-
-            if (keyboard.d)
-            catX += 50;
-
-            if (keyboard.a)
-            catX -= 50;
-
-            if (keyboard.w)
-            catY -= 50;
-
-            if (keyboard.s)
-            catY += 50;
-
-        var d = distance(mouse.x, mouse.y, catX, catY);
-        
-        if (d < 40)
-        {
-            alert("game over");
-            showMouse();
-            stopUpdate();
-        }
-    }
     </script>
 </body>
 </html>
