@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRON</title>
+</head>
+<body>
+    <script src="https://spelprogrammering.nu/simple.js">
+
+        var player = {x: 100, y: 100, size: 45, xSpeed: 0, ySpeed: 0};
+
+        function update()
+        {
+            rectangle(player.x, player.y, player.size, player.size, "red");
+
+            player.x += player.xSpeed;
+            player.y += player.ySpeed;
+
+            if (keyboard.w)
+            {
+                player.ySpeed = -10;
+                player.xSpeed = 0;
+            }
+
+            if (keyboard.s)
+            {
+                player.ySpeed = 10;
+                player.xSpeed = 0;
+            }
+
+            if (keyboard.a)
+            {
+                player.ySpeed = 0;
+                player.xSpeed = -10;
+            }
+
+            if (keyboard.d)
+            {
+                player.ySpeed = 0;
+                player.xSpeed = 10;
+            }
+        }
+
+    </script>
+</body>
+</html>
