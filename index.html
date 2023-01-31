@@ -1,54 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tha</title>
+
 </head>
 <body>
     <script src="https://spelprogrammering.nu/simple.js">
-
-        rectangle(5, 5, totalWidth-10, totalHeight-10, "black")
-
-        var player = {x: 50, y: 50, size: 45, speed: 40};
+        var zombie = {
+            x: random(totalWidth),
+            y: random(totalHeight),
+            speed: random(1,5)
+        }
 
         function update()
         {
-            with(player)
+            clearScreen();
+
+            picture(zombie.x, zombie.y, "http://spelprogrammering.nu/bilder/zombie.png");
+
+            if (zombie.x < mouse.x)
+            zombie.x += zombie.speed;
+            else zombie.x -= zombie.speed;
+
+            if (zombie.y < mouse.y)
+            zombie.y += zombie.speed;
+            else (zombie.y -= zombie.speed)
+
+            if (distance(mouse, zombie) < 5)
             {
-
-                rectangle(x, y, size, size, "red");
-
-                    x += speed;
-                    y += speed;
-
-                if (keyboard.w)
-                {
-                    speed = -10;
-                    speed = 0;
-                }
-
-                if (keyboard.s)
-                {
-                    ySpeed = 10;
-                    xSpeed = 0;
-                }
-
-                if (keyboard.a)
-                {
-                    ySpeed = 0;
-                    xSpeed = -10;
-                }
-
-                if (keyboard.d)
-                {
-                    ySpeed = 0;
-                    xSpeed = 10;
-                }
+                alert("Game Over");
+                stopUpdate();
             }
         }
-
     </script>
 </body>
-</html>
