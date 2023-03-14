@@ -22,8 +22,10 @@
 
         var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5)};
 
+        let themeMusic = new Audio("./zombiesong.mp3");
         function update()
         {
+            themeMusic.play();
             clearScreen();
 
             var i = 0;
@@ -34,7 +36,7 @@
             {
                 var zombie = zombies[i];
 
-                picture(zombie.x, zombie.y, "http://spelprogrammering.nu/bilder/zombie.png");
+                picture(zombie.x, zombie.y, "https://cdn.discordapp.com/attachments/947293748835000404/1083342963276513341/pixil-frame-0_2.png");
 
                 if (zombie.x < mouse.x)
                     zombie.x += zombie.speed;
