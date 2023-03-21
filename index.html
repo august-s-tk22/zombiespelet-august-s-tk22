@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <script src="https://spelprogrammering.nu/simple.js">
@@ -9,7 +9,22 @@
         
         var i = 0
 
-        while (i < 100)
+        var player = { x: totalWidth/2, y: totalHeight/2, speed: 15, radius: 10 };
+
+        var keys = {};
+            document.addEventListener("keydown", function(event) {
+                keys[event.key] = true;
+            });
+            document.addEventListener("keyup", function(event) {
+                keys[event.key] = false;
+            });
+            function keyDown(key) {
+            return keys[key] === true;
+        }
+
+        // Zombies amount
+        var i = 0; 
+        while (i < 5)
         {
             zombies.push({
             x: random(totalWidth),
@@ -17,42 +32,59 @@
             speed: random(3,7)
             });
 
-            i += 1;
+            i ++;
         }
 
         var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5)};
 
-        let themeMusic = new Audio("./zombiesong.mp3");
+        let themeMusic = new Audio("./media/zombiesong.mp3");
+        
         function update()
         {
             themeMusic.play();
             clearScreen();
 
-            var i = 0;
+            // Update player position via keyboard
+            if (keyDown("w")) {
+                player.y -= player.speed;
+            }
+            if (keyDown("s")) {
+                player.y += player.speed;
+            }
+            if (keyDown("a")) {
+                player.x -= player.speed;
+            }
+            if (keyDown("d")) {
+                player.x += player.speed;
+            }
 
-            while (i < 5)
-            // Antalet zombies
+            // Player image
+            picture(player.x, player.y, "./media/player.png");
 
+            // Update zombie positions
+            for (var i = 0; i < zombies.length; i++)
             {
                 var zombie = zombies[i];
+                var image = new Image();
+                image.src = "./media/zombie.png";
+                var width = image.width * 0.5; // half of the original width
+                var height = image.height * 0.5; // half of the original height
+                context.scale(0.5, 0.5); // scale the image down by half
+                context.drawImage(image, zombie.x, zombie.y, width, height);
 
-                picture(zombie.x, zombie.y, "https://cdn.discordapp.com/attachments/947293748835000404/1083342963276513341/pixil-frame-0_2.png");
-
-                if (zombie.x < mouse.x)
+            // Update zombie position -> player
+                if (zombie.x < player.x)
                     zombie.x += zombie.speed;
                 else zombie.x -= zombie.speed;
-
-                if (zombie.y < mouse.y)
+                if (zombie.y < player.y)
                     zombie.y += zombie.speed;
-                else (zombie.y -= zombie.speed)
+                else zombie.y -= zombie.speed;
 
-                if (distance(mouse, zombie) < 5)
-                {
+            // Check for collision with player
+                if (distance(player, zombie) < player.radius) {
                     alert("Game Over");
                     stopUpdate();
-                }   
-
-                i += 1;
+                }
             }
         }
 
