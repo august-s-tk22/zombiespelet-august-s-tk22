@@ -65,12 +65,7 @@
             for (var i = 0; i < zombies.length; i++)
             {
                 var zombie = zombies[i];
-                var image = new Image();
-                image.src = "./media/zombie.png";
-                var width = image.width * 0.5; // half of the original width
-                var height = image.height * 0.5; // half of the original height
-                context.scale(0.5, 0.5); // scale the image down by half
-                context.drawImage(image, zombie.x, zombie.y, width, height);
+                picture(zombie.x, zombie.y, "./media/zombie.png");
 
             // Update zombie position -> player
                 if (zombie.x < player.x)
