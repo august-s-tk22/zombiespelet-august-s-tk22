@@ -42,6 +42,8 @@
         // Radius = hitbox
         // Size of zombie
         var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5), radius: 35, width: 32*3, height: 32*3};
+
+        var weapon = {x: random(totalWidth), y: random(totalHeight), active: false};
       
         let themeMusic;
         
@@ -68,9 +70,21 @@
           if (keyDown("d")) {
             player.x += player.speed;
           }
+
+          if (distance(player, weapon) <= player.radius + 16) {
+            weapon.active = true;
+          }
+
+          if (weapon.active) {
+            picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
+          }
       
           // Player image
           picture(player.x, player.y, "./media/player.png", player.width, player.height);
+
+          if (!weapon.active) {
+            picture(weapon.x, weapon.y, "./media/bat.png", 32, 32);
+          }
       
           // Update zombie positions
           for (var i = 0; i < zombies.length; i++)
@@ -94,7 +108,7 @@
           }
 
           // Check if space key is pressed
-          if (keyDown(" ")) {
+          if (weapon.active && keyDown(" ")) {
             // Check for collision with zombies
             for (var i = 0; i < zombies.length; i++) {
               var zombie = zombies[i];
@@ -102,9 +116,37 @@
                 // Remove the zombie from the array
                 zombies.splice(i, 1);
                 i--;
+
                 // Play the sound effect
                 var splatSound = new Audio("./media/splat.mp3");
                 splatSound.play();
+
+                // Display bloodsplat image
+                picture(zombie.x, zombie.y, "./media/bloodsplat.png", 120, 120);
+
+                // Get the bloodsplat image element and fade it in
+                var bloodsplatImg = document.querySelector("img[src='./media/bloodsplat.png']");
+                if (bloodsplatImg) {
+                  bloodsplatImg.style.transition = "opacity 1s ease-in-out";
+                  bloodsplatImg.style.opacity = 1;
+
+                  // Fade out the image after 2 seconds
+                  setTimeout(function() {
+                    bloodsplatImg.style.opacity = 1000;
+                  }, 2000);
+
+                  // Gradually decrease opacity to 0 over 1 second
+                  setTimeout(function() {
+                    var opacity = 1;
+                    setInterval(function() {
+                      opacity -= 0.1;
+                      bloodsplatImg.style.opacity = opacity;
+                      if (opacity <= 0) {
+                        clearInterval();
+                      }
+                    }, 100);
+                  }, 1000);
+                }
               }
             }
           }

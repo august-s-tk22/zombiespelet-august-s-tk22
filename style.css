@@ -1,5 +1,6 @@
 body {
-    background: url("./media/background2.jpeg");
+    background: url("./media/background.png");
     background-size: cover;
+    background-repeat: no-repeat;
 }
   
