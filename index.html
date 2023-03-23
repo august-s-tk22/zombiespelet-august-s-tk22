@@ -4,6 +4,7 @@
 </head>
 <body>
     <script src="https://spelprogrammering.nu/simple.js">
+      
         var zombies = [];
         var i = 0;
       
@@ -91,8 +92,26 @@
               stopUpdate();
             }
           }
+
+          // Check if space key is pressed
+          if (keyDown(" ")) {
+            // Check for collision with zombies
+            for (var i = 0; i < zombies.length; i++) {
+              var zombie = zombies[i];
+              if (distance(player, zombie) <= player.radius + zombie.radius + 50) { // 50 is the radius for killing zombies
+                // Remove the zombie from the array
+                zombies.splice(i, 1);
+                i--;
+                // Play the sound effect
+                var splatSound = new Audio("./media/splat.mp3");
+                splatSound.play();
+              }
+            }
+          }
+
         }
-      
+
+        // Used ChatGPT for this. It was my last resort. Didn't know how to make it work
         function distance(obj1, obj2) {
           var dx = obj1.x - obj2.x;
           var dy = obj1.y - obj2.y;
