@@ -112,7 +112,7 @@
             // Check for collision with zombies
             for (var i = 0; i < zombies.length; i++) {
               var zombie = zombies[i];
-              if (distance(player, zombie) <= player.radius + zombie.radius + 50) { // 50 is the radius for killing zombies
+              if (distance(player, zombie) <= player.radius + zombie.radius + 100) { // 50 is the radius for killing zombies
                 // Remove the zombie from the array
                 zombies.splice(i, 1);
                 i--;
