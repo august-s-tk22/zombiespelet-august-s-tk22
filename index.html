@@ -44,71 +44,76 @@
         var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5), radius: 35, width: 32*3, height: 32*3};
 
         var weapon = {x: random(totalWidth), y: random(totalHeight), active: false};
+
+        var lastUsedTime = 0;
       
         let themeMusic;
         
         function update()
+{
+        if (!themeMusic) {
+          themeMusic = new Audio("./media/zombiesong.mp3");
+          themeMusic.loop = true; // Add loop to continuously play the music
+          themeMusic.play();
+        }
+
+        clearScreen();
+
+        // Update player position via keyboard
+        if (keyDown("w")) {
+          player.y -= player.speed;
+        }
+        if (keyDown("s")) {
+          player.y += player.speed;
+        }
+        if (keyDown("a")) {
+          player.x -= player.speed;
+        }
+        if (keyDown("d")) {
+          player.x += player.speed;
+        }
+
+        if (distance(player, weapon) <= player.radius + 16) {
+          weapon.active = true;
+        }
+
+        if (weapon.active) {
+          picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
+        }
+
+        // Player image
+        picture(player.x, player.y, "./media/player.png", player.width, player.height);
+
+        if (!weapon.active) {
+          picture(weapon.x, weapon.y, "./media/bat.png", 70, 70);
+        }
+
+        // Update zombie positions
+        for (var i = 0; i < zombies.length; i++)
         {
-          if (!themeMusic) {
-            themeMusic = new Audio("./media/zombiesong.mp3");
-            themeMusic.loop = true; // Add loop to continuously play the music
-            themeMusic.play();
-          }
+          var zombie = zombies[i];
+          picture(zombie.x, zombie.y, "./media/zombie.png", zombie.width, zombie.height);
 
-          clearScreen();
-      
-          // Update player position via keyboard
-          if (keyDown("w")) {
-            player.y -= player.speed;
-          }
-          if (keyDown("s")) {
-            player.y += player.speed;
-          }
-          if (keyDown("a")) {
-            player.x -= player.speed;
-          }
-          if (keyDown("d")) {
-            player.x += player.speed;
-          }
+          // Update zombie position -> player
+          if (zombie.x < player.x)
+            zombie.x += zombie.speed;
+          else zombie.x -= zombie.speed;
+          if (zombie.y < player.y)
+            zombie.y += zombie.speed;
+          else zombie.y -= zombie.speed;
 
-          if (distance(player, weapon) <= player.radius + 16) {
-            weapon.active = true;
+          // Check for collision with player
+          if (distance(player, zombie) <= player.radius + zombie.radius) {
+            alert("Game Over");
+            stopUpdate();
           }
+        }
 
-          if (weapon.active) {
-            picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
-          }
-      
-          // Player image
-          picture(player.x, player.y, "./media/player.png", player.width, player.height);
-
-          if (!weapon.active) {
-            picture(weapon.x, weapon.y, "./media/bat.png", 32, 32);
-          }
-      
-          // Update zombie positions
-          for (var i = 0; i < zombies.length; i++)
-          {
-            var zombie = zombies[i];
-            picture(zombie.x, zombie.y, "./media/zombie.png", zombie.width, zombie.height);
-      
-            // Update zombie position -> player
-            if (zombie.x < player.x)
-              zombie.x += zombie.speed;
-            else zombie.x -= zombie.speed;
-            if (zombie.y < player.y)
-              zombie.y += zombie.speed;
-            else zombie.y -= zombie.speed;
-      
-            // Check for collision with player
-            if (distance(player, zombie) <= player.radius + zombie.radius) {
-              alert("Game Over");
-              stopUpdate();
-            }
-          }
-
-          // Check if space key is pressed
-          if (weapon.active && keyDown(" ")) {
+        // Check if space key is pressed and weapon is ready to be used
+        if (weapon.active && keyDown(" ") && Date.now() - lastUsedTime > 500) {
+          // Set last used time to current time
+          lastUsedTime = Date.now();
+          
             // Check for collision with zombies
             for (var i = 0; i < zombies.length; i++) {
               var zombie = zombies[i];
