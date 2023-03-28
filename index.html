@@ -10,6 +10,11 @@
       
         // Radius = hitbox
         var player = { x: totalWidth/2, y: totalHeight/2, speed: 15, radius: 35, width: 32*3, height: 32*3 };
+        var playerHealth = 100;
+        var healthBarWidth = 200;
+        var healthBarHeight = 20;
+        var healthBarX = (totalWidth - healthBarWidth) / 2;
+        var healthBarY = 20;
       
         var keys = {};
         document.addEventListener("keydown", function(event) {
@@ -59,6 +64,11 @@
 
         clearScreen();
 
+        // Draw health bar
+        rectangle(healthBarX, healthBarY, healthBarWidth, healthBarHeight, "gray");
+        var healthBarFillWidth = healthBarWidth * (playerHealth / 100);
+        rectangle(healthBarX, healthBarY, healthBarFillWidth, healthBarHeight, "red");
+
         // Update player position via keyboard
         if (keyDown("w")) {
           player.y -= player.speed;
@@ -103,14 +113,21 @@
           else zombie.y -= zombie.speed;
 
           // Check for collision with player
-          if (distance(player, zombie) <= player.radius + zombie.radius) {
+          if (playerHealth <= 0) {
             alert("Game Over");
             stopUpdate();
           }
         }
+        for (let i = 0; i < zombies.length; i++){
+            zombie = zombies[i];
+            if (distance(player, zombie) <= player.radius + zombie.radius) {
+                playerHealth -= 1;
+            }
+        }
+        
 
         // Check if space key is pressed and weapon is ready to be used
-        if (weapon.active && keyDown(" ") && Date.now() - lastUsedTime > 500) {
+        if (weapon.active && keyDown(" ") && Date.now() - lastUsedTime > 100) {
           // Set last used time to current time
           lastUsedTime = Date.now();
           
@@ -118,6 +135,7 @@
             for (var i = 0; i < zombies.length; i++) {
               var zombie = zombies[i];
               if (distance(player, zombie) <= player.radius + zombie.radius + 100) { // 50 is the radius for killing zombies
+
                 // Remove the zombie from the array
                 zombies.splice(i, 1);
                 i--;
@@ -135,12 +153,12 @@
                   bloodsplatImg.style.transition = "opacity 1s ease-in-out";
                   bloodsplatImg.style.opacity = 1;
 
-                  // Fade out the image after 2 seconds
+                  // Fade out the image after 2 seconds (does not work)
                   setTimeout(function() {
                     bloodsplatImg.style.opacity = 1000;
                   }, 2000);
 
-                  // Gradually decrease opacity to 0 over 1 second
+                  // Gradually decrease opacity to 0 over 1 second (does not work)
                   setTimeout(function() {
                     var opacity = 1;
                     setInterval(function() {
@@ -151,6 +169,7 @@
                       }
                     }, 100);
                   }, 1000);
+                playerHealth -= 1;
                 }
               }
             }
@@ -158,7 +177,7 @@
 
         }
 
-        // Used ChatGPT for this. It was my last resort. Didn't know how to make it work
+        // Taken from internet
         function distance(obj1, obj2) {
           var dx = obj1.x - obj2.x;
           var dy = obj1.y - obj2.y;
