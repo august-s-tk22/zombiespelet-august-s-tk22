@@ -121,7 +121,7 @@
         for (let i = 0; i < zombies.length; i++){
             zombie = zombies[i];
             if (distance(player, zombie) <= player.radius + zombie.radius) {
-                playerHealth -= 1;
+                playerHealth -= 2;
             }
         }
         
