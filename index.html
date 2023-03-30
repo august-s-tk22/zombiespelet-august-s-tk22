@@ -131,14 +131,14 @@
         
 
         // Check if space key is pressed and weapon is ready to be used
-        if (weapon.active && keyDown(" ") && Date.now() - lastUsedTime > 100) {
+        if (weapon.active && keyDown(" ") && Date.now() - lastUsedTime > 500) {
           // Set last used time to current time
           lastUsedTime = Date.now();
           
             // Check for collision with zombies
             for (var i = 0; i < zombies.length; i++) {
               var zombie = zombies[i];
-              if (distance(player, zombie) <= player.radius + zombie.radius + 100) { // 50 is the radius for killing zombies
+              if (distance(player, zombie) <= player.radius + zombie.radius + 120) { // 120 is the radius for killing zombies
 
                 // Remove the zombie from the array
                 zombies.splice(i, 1);
@@ -160,22 +160,6 @@
                   bloodsplatImg.style.transition = "opacity 1s ease-in-out";
                   bloodsplatImg.style.opacity = 1;
 
-                  // Fade out the image after 2 seconds (does not work)
-                  setTimeout(function() {
-                    bloodsplatImg.style.opacity = 1000;
-                  }, 2000);
-
-                  // Gradually decrease opacity to 0 over 1 second (does not work)
-                  setTimeout(function() {
-                    var opacity = 1;
-                    setInterval(function() {
-                      opacity -= 0.1;
-                      bloodsplatImg.style.opacity = opacity;
-                      if (opacity <= 0) {
-                        clearInterval();
-                      }
-                    }, 100);
-                  }, 1000);
                 playerHealth -= 1;
                 }
 
