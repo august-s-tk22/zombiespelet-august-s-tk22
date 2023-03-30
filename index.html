@@ -53,6 +53,8 @@
         var lastUsedTime = 0;
       
         let themeMusic;
+
+        var points = 0;
         
         function update()
 {
@@ -63,6 +65,8 @@
         }
 
         clearScreen();
+
+        text(10, 40, 25, "Points: " + points, "white")
 
         // Draw health bar
         rectangle(healthBarX, healthBarY, healthBarWidth, healthBarHeight, "gray");
@@ -144,6 +148,9 @@
                 var splatSound = new Audio("./media/splat.mp3");
                 splatSound.play();
 
+                // Add 10 points
+                points += 10;
+
                 // Display bloodsplat image
                 picture(zombie.x, zombie.y, "./media/bloodsplat.png", 120, 120);
 
@@ -170,6 +177,27 @@
                     }, 100);
                   }, 1000);
                 playerHealth -= 1;
+                }
+
+                  if (zombies.length == 0) {
+                  // Play the sound effect
+                  var waveCompleteSound = new Audio("./media/wavecomplete.mp3");
+                  waveCompleteSound.play();
+
+                  // Add 100 points
+                  points += 100;
+
+                  // Spawn 5 more zombies
+                  for (var i = 0; i < 5; i++) {
+                    zombies.push({
+                      x: random(totalWidth),
+                      y: random(totalHeight),
+                      speed: random(3, 7),
+                      radius: 35,
+                      width: 32 * 3,
+                      height: 32 * 3
+                    });
+                  }
                 }
               }
             }
