@@ -10,6 +10,7 @@ Fixes:
 8. Bloodsplat stays on screen for certain amount of time.
 9. Counter goes up correlating how long you've been alive.
 10. Fix music.
+11. Can't hold down weapons.x
 
 To add:
 
