@@ -23,3 +23,7 @@ To add:
 7. Potential 2 player mode.
 8. Potential powerups.
 9. Potential highscore system.
+
+Credits:
+
+- Malthe

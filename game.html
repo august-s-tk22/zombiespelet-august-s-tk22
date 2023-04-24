@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="back-button-container">
-        <a href="index.html" class="back-button"><b>BACK</b></a>
+        <a href="index.html" class="back-button"><b>MENU</b></a>
     </div>
 
     <script src="https://spelprogrammering.nu/simple.js">
@@ -87,12 +87,17 @@
 
         let themeMusic;
 
+        let hurtSound = new Audio("./media/hurt.mp3");
+        let screamSound = new Audio("./media/scream.mp3");
+
+
         var points = 0;
 
         function update() {
 
             // Check if player is dead
             if (playerHealth <= 0) {
+                screamSound.play();
                 window.location.href = "index.html";
                 alert("You died!");
                 return;
@@ -184,6 +189,7 @@
                 zombie = zombies[i];
                 if (distance(player, zombie) <= player.radius + zombie.radius) {
                     playerHealth -= 3;
+                    hurtSound.play();
                 }
             }
 
