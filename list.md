@@ -26,4 +26,6 @@ To add:
 
 Credits:
 
-- Malthe
+- Malthe - gjorde några ljud
+- Jag - gjorde all grafik
+- Death Grips - ljuden och sample
