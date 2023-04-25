@@ -22,12 +22,14 @@
 		    width: 32 * 3,
 		    height: 32 * 3
 		};
+
 		var playerHealth = 100;
 		var healthBarWidth = 200;
 		var healthBarHeight = 20;
 		var healthBarX = (totalWidth - healthBarWidth) / 2;
 		var healthBarY = 20;
 		var bullets = [];
+		var bulletCooldown = 0;
 
 		var keys = {};
 		document.addEventListener("keydown", function(event) {
@@ -42,16 +44,29 @@
 		}
 
 		function shootGun() {
-		    if(keyboard.right){
-		        bullets.push({x: player.x, y: player.y, size: 7, color: "red", xMovement: 10, yMovement: 0 })
-		        console.log("apa chris är")
+		    if (keyboard.right && gun.active === true && bulletCooldown === 0){
+		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 30, yMovement: 0 })
+				bulletCooldown = 15
 		    }
 
-		    for(var i = 0; i < bullets.length; i++){
-		        rectangle(bullets[i].x, bullets[i].y, bullets[i].size, bullets[i].size, bullets[i].color);
-		        bullets[i].x += bullets[i].xMovement;
+			else if(keyboard.left && gun.active === true && bulletCooldown === 0){
+		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: -30, yMovement: 0 })
+				bulletCooldown = 15
 		    }
 
+			else if(keyboard.up && gun.active === true && bulletCooldown === 0){
+		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 0, yMovement: -30 })
+				bulletCooldown = 15
+		    }
+
+			else if(keyboard.down && gun.active === true && bulletCooldown === 0){
+		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 0, yMovement: 30 })
+				bulletCooldown = 15
+		    }
+
+			if (bulletCooldown > 0){
+				bulletCooldown--;
+			}
 		}
 
 		var medkit = {
@@ -114,8 +129,8 @@
 		var points = 0;
 
 		function update() {
-		    shootGun();
 
+		    shootGun();
 
 		    // Check if player is dead
 		    if (playerHealth <= 0) {
@@ -154,6 +169,12 @@
 		        player.x += player.speed;
 		    }
 
+			for(var i = 0; i < bullets.length; i++){
+		        rectangle(bullets[i].x, bullets[i].y, bullets[i].size, bullets[i].size, bullets[i].color);
+		        bullets[i].x += bullets[i].xMovement;
+				bullets[i].y += bullets[i].yMovement;
+		    }
+
 		    if (distance(player, weapon) <= player.radius + 16) {
 		        weapon.active = true;
 		    }
@@ -167,7 +188,7 @@
 		    }
 
 		    if (gun.active) {
-		        picture(player.x + 80, player.y + 30, "./media/gun.png", 70, 70);
+		        picture(player.x + 100, player.y + 10, "./media/gun.png", 70, 70);
 		    }
 
 		    // Player image
