@@ -30,6 +30,7 @@
 		var healthBarY = 20;
 		var bullets = [];
 		var bulletCooldown = 0;
+		var gunPicture = "./media/gun.png"
 
 		var keys = {};
 		document.addEventListener("keydown", function(event) {
@@ -45,27 +46,32 @@
 
 		function shootGun() {
 		    if (keyboard.right && gun.active === true && bulletCooldown === 0){
-		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 30, yMovement: 0 })
-				bulletCooldown = 15
+		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 30, yMovement: 0, damage: 50 })
+				bulletCooldown = 15;
+				gunPicture = "./media/gun.png";
 		    }
 
 			else if(keyboard.left && gun.active === true && bulletCooldown === 0){
-		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: -30, yMovement: 0 })
+		        bullets.push({x: player.x - 75, y: player.y + 40, size: 7, color: "red", xMovement: -30, yMovement: 0, damage: 50 })
 				bulletCooldown = 15
-		    }
-
-			else if(keyboard.up && gun.active === true && bulletCooldown === 0){
-		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 0, yMovement: -30 })
-				bulletCooldown = 15
-		    }
-
-			else if(keyboard.down && gun.active === true && bulletCooldown === 0){
-		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 0, yMovement: 30 })
-				bulletCooldown = 15
+				gunPicture = "./media/nug.png";
 		    }
 
 			if (bulletCooldown > 0){
 				bulletCooldown--;
+			}
+		}
+
+		function shotCollisionDetection(object) {
+			for (var i = 0; i < bullets.length; i++){
+				if (
+		      	bullets[i].x < object.x + object.width &&
+		      	bullets[i].x + bullets[i].size > object.x &&
+		     	bullets[i].y < object.y + object.height &&
+		    	bullets[i].size + bullets[i].y > object.y){
+					object.health -= bullets[i].damage;
+					bullets.splice(i, 1);
+				  }
 			}
 		}
 
@@ -89,7 +95,8 @@
 		        speed: random(3, 7),
 		        radius: 35,
 		        width: 32 * 3,
-		        height: 32 * 3
+		        height: 32 * 3,
+				health: 100
 		    });
 
 		    i++;
@@ -172,7 +179,6 @@
 			for(var i = 0; i < bullets.length; i++){
 		        rectangle(bullets[i].x, bullets[i].y, bullets[i].size, bullets[i].size, bullets[i].color);
 		        bullets[i].x += bullets[i].xMovement;
-				bullets[i].y += bullets[i].yMovement;
 		    }
 
 		    if (distance(player, weapon) <= player.radius + 16) {
@@ -187,9 +193,12 @@
 		        picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
 		    }
 
-		    if (gun.active) {
-		        picture(player.x + 100, player.y + 10, "./media/gun.png", 70, 70);
+		    if (gun.active && gunPicture === "./media/gun.png") {
+		        picture(player.x + 100, player.y + 10, gunPicture, 70, 70);
 		    }
+			else if(gun.active && gunPicture === "./media/nug.png"){
+				picture(player.x - 75, player.y + 10, gunPicture, 70, 70);
+			}
 
 		    // Player image
 		    picture(player.x, player.y, "./media/player.png", player.width, player.height);
@@ -201,6 +210,18 @@
 		    if (!gun.active) {
 		        picture(gun.x, gun.y, "./media/gun.png", 70, 70);
 		    }
+
+			if(keyboard.g && gun.active) {
+				gun.active = false;
+				gun.x = player.x + 80
+				gun.y = player.y + 30
+			}
+
+			if(keyboard.g && weapon.active) {
+				weapon.active = false;
+				weapon.x = player.x + 80
+				weapon.y = player.y + 30
+			}
 
 		    // Spawn medkit if it's not active and it's time to respawn
 		    if (!medkit.active && roundNumber() > medkit.lastPickedUpRound + medkit.respawnTime) {
@@ -225,6 +246,7 @@
 		    for (var i = 0; i < zombies.length; i++) {
 		        var zombie = zombies[i];
 		        picture(zombie.x, zombie.y, "./media/zombie.png", zombie.width, zombie.height);
+				rectangle(zombie.x, zombie.y - 15, zombie.width*(zombie.health/100), 5)
 
 		        // Update zombie position -> player
 		        if (zombie.x < player.x)
@@ -240,8 +262,12 @@
 		            stopUpdate();
 		        }
 		    }
-		    for (let i = 0; i < zombies.length; i++) {
+		    for (var i = 0; i < zombies.length; i++) {
 		        zombie = zombies[i];
+				if(zombie.health <= 0){
+						zombies.splice(i, 1);
+					}
+				shotCollisionDetection(zombie)
 		        if (distance(player, zombie) <= player.radius + zombie.radius) {
 		            playerHealth -= 3;
 		            hurtSound.play();
@@ -257,11 +283,11 @@
 		        // Check for collision with zombies
 		        for (var i = 0; i < zombies.length; i++) {
 		            var zombie = zombies[i];
+					
 		            if (distance(player, zombie) <= player.radius + zombie.radius + 120) { // 120 is the radius for killing zombies
 
 		                // Remove the zombie from the array
-		                zombies.splice(i, 1);
-		                i--;
+		                zombie.health -= 50;
 
 		                // Play the sound effect
 		                var splatSound = new Audio("./media/splat.mp3");
