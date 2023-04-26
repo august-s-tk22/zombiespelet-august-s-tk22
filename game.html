@@ -30,7 +30,9 @@
 		var healthBarY = 20;
 		var bullets = [];
 		var bulletCooldown = 0;
+
 		var gunPicture = "./media/gun.png"
+		var riflePicture = "./media/rifle.png"
 
 		var keys = {};
 		document.addEventListener("keydown", function(event) {
@@ -47,14 +49,32 @@
 		function shootGun() {
 		    if (keyboard.right && gun.active === true && bulletCooldown === 0){
 		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 30, yMovement: 0, damage: 50 })
-				bulletCooldown = 15;
+				bulletCooldown = 30;
 				gunPicture = "./media/gun.png";
 		    }
 
 			else if(keyboard.left && gun.active === true && bulletCooldown === 0){
 		        bullets.push({x: player.x - 75, y: player.y + 40, size: 7, color: "red", xMovement: -30, yMovement: 0, damage: 50 })
-				bulletCooldown = 15
+				bulletCooldown = 30;
 				gunPicture = "./media/nug.png";
+		    }
+
+			if (bulletCooldown > 0){
+				bulletCooldown--;
+			}
+		}
+
+		function shootRifle() {
+		    if (keyboard.right && rifle.active === true && bulletCooldown === 0){
+		        bullets.push({x: player.x + 165, y: player.y + 40, size: 7, color: "red", xMovement: 30, yMovement: 0, damage: 50 })
+				bulletCooldown = 9;
+				riflePicture = "./media/rifle.png";
+		    }
+
+			else if(keyboard.left && rifle.active === true && bulletCooldown === 0){
+		        bullets.push({x: player.x - 75, y: player.y + 40, size: 7, color: "red", xMovement: -30, yMovement: 0, damage: 50 })
+				bulletCooldown = 9;
+				riflePicture = "./media/elfir.png";
 		    }
 
 			if (bulletCooldown > 0){
@@ -125,6 +145,12 @@
 		    active: false
 		}
 
+		var rifle = {
+		    x: random(totalWidth),
+		    y: random(totalHeight),
+		    active: false,
+		}
+
 		var lastUsedTime = 0;
 
 		let themeMusic;
@@ -138,6 +164,8 @@
 		function update() {
 
 		    shootGun();
+
+			shootRifle();
 
 		    // Check if player is dead
 		    if (playerHealth <= 0) {
@@ -189,6 +217,10 @@
 		        gun.active = true;
 		    }
 
+			if (distance(player, rifle) <= player.radius + 16) {
+		        rifle.active = true;
+		    }
+
 		    if (weapon.active) {
 		        picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
 		    }
@@ -196,8 +228,17 @@
 		    if (gun.active && gunPicture === "./media/gun.png") {
 		        picture(player.x + 100, player.y + 10, gunPicture, 70, 70);
 		    }
+
 			else if(gun.active && gunPicture === "./media/nug.png"){
 				picture(player.x - 75, player.y + 10, gunPicture, 70, 70);
+			}
+
+			if (rifle.active && riflePicture === "./media/rifle.png") {
+		        picture(player.x + 110, player.y - 12, riflePicture, 100, 100);
+		    }
+			
+			else if(rifle.active && riflePicture === "./media/elfir.png"){
+				picture(player.x - 110, player.y - 12, riflePicture, 100, 100);
 			}
 
 		    // Player image
@@ -211,10 +252,20 @@
 		        picture(gun.x, gun.y, "./media/gun.png", 70, 70);
 		    }
 
+			if (!rifle.active) {
+		        picture(rifle.x, rifle.y, "./media/rifle.png", 70, 70);
+		    }
+
 			if(keyboard.g && gun.active) {
 				gun.active = false;
 				gun.x = player.x + 80
 				gun.y = player.y + 30
+			}
+
+			if(keyboard.g && rifle.active) {
+				rifle.active = false;
+				rifle.x = player.x + 80
+				rifle.y = player.y + 30
 			}
 
 			if(keyboard.g && weapon.active) {
