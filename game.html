@@ -240,15 +240,15 @@
 				bullets[i].x += bullets[i].xMovement;
 			}
 
-			if (distance(player, weapon) <= player.radius + 16) {
+			if (distance(player, weapon) <= player.radius + 16 && !gun.active && !rifle.active) {
 				weapon.active = true;
 			}
 
-			if (distance(player, gun) <= player.radius + 16) {
+			if (distance(player, gun) <= player.radius + 16 && !weapon.active && !rifle.active) {
 				gun.active = true;
 			}
 
-			if (distance(player, rifle) <= player.radius + 16) {
+			if (distance(player, rifle) <= player.radius + 16 && !gun.active && !weapon.active) {
 				rifle.active = true;
 			}
 
