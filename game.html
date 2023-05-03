@@ -216,11 +216,6 @@
 
 			text(10, 40, 25, "Points: " + points, "white")
 
-			// Draw health bar
-			rectangle(healthBarX, healthBarY, healthBarWidth, healthBarHeight, "gray");
-			var healthBarFillWidth = healthBarWidth * (playerHealth / 100);
-			rectangle(healthBarX, healthBarY, healthBarFillWidth, healthBarHeight, "red");
-
 			// Update player position via keyboard
 			if (keyDown("w")) {
 				player.y -= player.speed;
@@ -270,6 +265,7 @@
 
 			// Player image
 			picture(player.x, player.y, "./media/player.png", player.width, player.height);
+			rectangle(((2*player.x +  player.width)/2)-(player.width* bulletCooldown/30), player.y + player.height + 15, 2*(player.width * bulletCooldown/30), 5, "blue")
 
 			if (!weapon.active) {
 				picture(weapon.x, weapon.y, "./media/bat.png", 70, 70);
@@ -324,7 +320,8 @@
 			for (var i = 0; i < zombies.length; i++) {
 				var zombie = zombies[i];
 				picture(zombie.x, zombie.y, "./media/zombie.png", zombie.width, zombie.height);
-				rectangle(zombie.x, zombie.y - 15, zombie.width * (zombie.health / 100), 5)
+				rectangle(zombie.x, zombie.y - 15, zombie.width, 5, "grey");
+				rectangle(zombie.x, zombie.y - 15, zombie.width * (zombie.health / 100), 5, "red");
 
 				// Update zombie position -> player
 				if (zombie.x < player.x)
