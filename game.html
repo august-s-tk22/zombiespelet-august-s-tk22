@@ -32,6 +32,7 @@
 		var healthBarY = 20;
 		var bullets = [];
 		var bulletCooldown = 0;
+		var weaponCooldown = 0;
 		var wave = 0
 
 		var gunPicture = "./media/gun.png"
@@ -198,6 +199,10 @@
 
 			shootRifle();
 
+			if (weaponCooldown > 0) {
+				weaponCooldown--;
+			}
+
 			// Check if player is dead
 			if (playerHealth <= 0) {
 				screamSound.play();
@@ -265,7 +270,10 @@
 
 			// Player image
 			picture(player.x, player.y, "./media/player.png", player.width, player.height);
+			rectangle(player.x, player.y - 15, player.width, 10, "grey");
+			rectangle(player.x, player.y - 15, player.width * (playerHealth / 100), 10, "purple");
 			rectangle(((2*player.x +  player.width)/2)-(player.width* bulletCooldown/30), player.y + player.height + 15, 2*(player.width * bulletCooldown/30), 5, "blue")
+			rectangle(((2*player.x +  player.width)/2)-(player.width* weaponCooldown/30), player.y + player.height + 15, 2*(player.width * weaponCooldown/30), 5, "blue")
 
 			if (!weapon.active) {
 				picture(weapon.x, weapon.y, "./media/bat.png", 70, 70);
@@ -298,7 +306,7 @@
 			}
 
 			// Spawn medkit if it's not active and it's time to respawn
-			if (!medkit.active && roundNumber() > medkit.lastPickedUpRound + medkit.respawnTime) {
+			if (!medkit.active && points===100) {
 				medkit.x = random(totalWidth - medkit.size);
 				medkit.y = random(totalHeight - medkit.size);
 				medkit.active = true;
@@ -375,9 +383,9 @@
 
 
 			// Check if space key is pressed and weapon is ready to be used
-			if (weapon.active && keyDown(" ") && Date.now() - lastUsedTime > 500) {
+			if (weapon.active && keyDown(" ") && weaponCooldown === 0) {
 				// Set last used time to current time
-				lastUsedTime = Date.now();
+				weaponCooldown = 30;
 
 				// Check for collision with zombies
 				for (var i = 0; i < zombies.length; i++) {
@@ -397,18 +405,7 @@
 						// Add 10 points
 						points += 10;
 
-						// Display bloodsplat image
-						picture(zombie.x, zombie.y, "./media/bloodsplat.png", 120, 120);
-
 						// Get the bloodsplat image element and fade it in
-						var bloodsplatImg = document.querySelector("img[src='./media/bloodsplat.png']");
-						if (bloodsplatImg) {
-							bloodsplatImg.style.transition = "opacity 1s ease-in-out";
-							bloodsplatImg.style.opacity = 1;
-
-							playerHealth -= 1;
-						}
-
 						console
 
 						if (medkit.active) {
