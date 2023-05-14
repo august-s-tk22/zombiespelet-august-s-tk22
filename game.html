@@ -19,12 +19,12 @@
 
 		// Defines the player object and its properties, being the player's position on screen, speed, radius, and of course the player's width and height.
 		var player = {
-		    x: totalWidth / 2, // Center of the screen on the x-coordinate.
-		    y: totalHeight / 2, // Center of the screen on the y-coordinate.
-		    speed: 15,
-		    radius: 35,
-		    width: 32 * 3,
-		    height: 32 * 3
+			x: totalWidth / 2, // Center of the screen on the x-coordinate.
+			y: totalHeight / 2, // Center of the screen on the y-coordinate.
+			speed: 15,
+			radius: 35,
+			width: 32 * 3,
+			height: 32 * 3
 		};
 
 		// Initializes the variables for the player's health and health bar.
@@ -48,162 +48,162 @@
 
 		// Add event listeners for key presses and releases, as well as stores their state in an object.
 		var keys = {};
-		document.addEventListener("keydown", function(event) {
-		    keys[event.key] = true;
+		document.addEventListener("keydown", function (event) {
+			keys[event.key] = true;
 		});
-		document.addEventListener("keyup", function(event) {
-		    keys[event.key] = false;
+		document.addEventListener("keyup", function (event) {
+			keys[event.key] = false;
 		});
 
 		// Checks if a specific key is currently being pressed/held.
 		function keyDown(key) {
-		    return keys[key] === true;
+			return keys[key] === true;
 		}
 
 		// This function is responsible for shooting bullets from the gun.
 		function shootGun() {
-		    // If the right arrow key is pressed, and the gun is active, as well as the bulletCooldown is zero, then a bullet is added to the bullets array with a certain set of properties. 
-		    // The gun image is also updated.
-		    if (keyboard.right && gun.active === true && bulletCooldown === 0) {
-		        bullets.push({
-		            x: player.x + 165,
-		            y: player.y + 40,
-		            size: 7,
-		            color: "red",
-		            xMovement: 30,
-		            yMovement: 0,
-		            damage: 50
-		        });
-		        bulletCooldown = 30;
-		        gunPicture = "./media/gun.png";
-		    }
-		    // Same thing as the last comment here, but with the right arrow key.
-		    else if (keyboard.left && gun.active === true && bulletCooldown === 0) {
-		        bullets.push({
-		            x: player.x - 75,
-		            y: player.y + 40,
-		            size: 7,
-		            color: "red",
-		            xMovement: -30,
-		            yMovement: 0,
-		            damage: 50
-		        });
-		        bulletCooldown = 30;
-		        gunPicture = "./media/nug.png";
-		    }
+			// If the right arrow key is pressed, and the gun is active, as well as the bulletCooldown is zero, then a bullet is added to the bullets array with a certain set of properties. 
+			// The gun image is also updated.
+			if (keyboard.right && gun.active === true && bulletCooldown === 0) {
+				bullets.push({
+					x: player.x + 165,
+					y: player.y + 40,
+					size: 7,
+					color: "red",
+					xMovement: 30,
+					yMovement: 0,
+					damage: 50
+				});
+				bulletCooldown = 30;
+				gunPicture = "./media/gun.png";
+			}
+			// Same thing as the last comment here, but with the right arrow key.
+			else if (keyboard.left && gun.active === true && bulletCooldown === 0) {
+				bullets.push({
+					x: player.x - 75,
+					y: player.y + 40,
+					size: 7,
+					color: "red",
+					xMovement: -30,
+					yMovement: 0,
+					damage: 50
+				});
+				bulletCooldown = 30;
+				gunPicture = "./media/nug.png";
+			}
 
-		    // If the bulletCooldown is greater than zero, decrement the bulletCooldown.
-		    if (bulletCooldown > 0) {
-		        bulletCooldown--;
-		    }
+			// If the bulletCooldown is greater than zero, decrement the bulletCooldown.
+			if (bulletCooldown > 0) {
+				bulletCooldown--;
+			}
 		}
 
 		// This function is responsible for shooting bullets from the rifle (the other gun).
 		function shootRifle() {
-		    // Same thing as the other gun here, just a little different.
-		    if (keyboard.right && rifle.active === true && bulletCooldown === 0) {
-		        bullets.push({
-		            x: player.x + 165,
-		            y: player.y + 40,
-		            size: 7,
-		            color: "red",
-		            xMovement: 30,
-		            yMovement: 0,
-		            damage: 50
-		        });
-		        bulletCooldown = 9;
-		        riflePicture = "./media/rifle.png";
-		    }
-		    // Samesies. I really don't need to comment over this but I feel like I should...
-		    else if (keyboard.left && rifle.active === true && bulletCooldown === 0) {
-		        bullets.push({
-		            x: player.x - 75,
-		            y: player.y + 40,
-		            size: 7,
-		            color: "red",
-		            xMovement: -30,
-		            yMovement: 0,
-		            damage: 50
-		        });
-		        bulletCooldown = 9;
-		        riflePicture = "./media/elfir.png";
-		    }
+			// Same thing as the other gun here, just a little different.
+			if (keyboard.right && rifle.active === true && bulletCooldown === 0) {
+				bullets.push({
+					x: player.x + 165,
+					y: player.y + 40,
+					size: 7,
+					color: "red",
+					xMovement: 30,
+					yMovement: 0,
+					damage: 50
+				});
+				bulletCooldown = 9;
+				riflePicture = "./media/rifle.png";
+			}
+			// Samesies. I really don't need to comment over this but I feel like I should...
+			else if (keyboard.left && rifle.active === true && bulletCooldown === 0) {
+				bullets.push({
+					x: player.x - 75,
+					y: player.y + 40,
+					size: 7,
+					color: "red",
+					xMovement: -30,
+					yMovement: 0,
+					damage: 50
+				});
+				bulletCooldown = 9;
+				riflePicture = "./media/elfir.png";
+			}
 
-		    // If the bulletCooldown is greater than zero, decrement the bulletCooldown.
-		    if (bulletCooldown > 0) {
-		        bulletCooldown--;
-		    }
+			// If the bulletCooldown is greater than zero, decrement the bulletCooldown.
+			if (bulletCooldown > 0) {
+				bulletCooldown--;
+			}
 		}
 
 		// Detects if a zombie has collided with the bullet. If so, the zombie takes damage.
 		// If a collision is detected, the bullet is removed from the bullets array.
 		function shotCollisionDetection(object) {
-		    for (var i = 0; i < bullets.length; i++) {
-		        if (
-		            bullets[i].x < object.x + object.width &&
-		            bullets[i].x + bullets[i].size > object.x &&
-		            bullets[i].y < object.y + object.height &&
-		            bullets[i].size + bullets[i].y > object.y) {
-		            object.health -= bullets[i].damage;
-		            bullets.splice(i, 1);
-		        }
-		    }
+			for (var i = 0; i < bullets.length; i++) {
+				if (
+					bullets[i].x < object.x + object.width &&
+					bullets[i].x + bullets[i].size > object.x &&
+					bullets[i].y < object.y + object.height &&
+					bullets[i].size + bullets[i].y > object.y) {
+					object.health -= bullets[i].damage;
+					bullets.splice(i, 1);
+				}
+			}
 		}
 
 		// A medkit object with x and y coordinates, size, image, and respawn time.
 		var medkit = {
-		    x: 0,
-		    y: 0,
-		    size: 100,
-		    image: "./media/medkit.png",
-		    active: false,
-		    respawnTime: 5,
-		    lastPickedUpRound: -1
+			x: 0,
+			y: 0,
+			size: 100,
+			image: "./media/medkit.png",
+			active: false,
+			respawnTime: 5,
+			lastPickedUpRound: -1
 		};
 
 		// Creates five zombies with random positions.
 		var i = 0;
 		while (i < 5) {
-		    zombies.push({
-		        x: random(totalWidth),
-		        y: random(totalHeight),
-		        speed: random(3, 7),
-		        radius: 35,
-		        width: 32 * 3,
-		        height: 32 * 3,
-		        health: 100
-		    });
-		    i++;
+			zombies.push({
+				x: random(totalWidth),
+				y: random(totalHeight),
+				speed: random(3, 7),
+				radius: 35,
+				width: 32 * 3,
+				height: 32 * 3,
+				health: 100
+			});
+			i++;
 		}
 
 		var zombie = {
-		    x: random(totalWidth),
-		    y: random(totalHeight),
-		    speed: random(1, 5),
-		    radius: 35,
-		    width: 32 * 3,
-		    height: 32 * 3
+			x: random(totalWidth),
+			y: random(totalHeight),
+			speed: random(1, 5),
+			radius: 35,
+			width: 32 * 3,
+			height: 32 * 3
 		};
 
 		// Weapon (baseball bat/melee) that spawns on a random position on screen.
 		var weapon = {
-		    x: random(totalWidth),
-		    y: random(totalHeight),
-		    active: false
+			x: random(totalWidth),
+			y: random(totalHeight),
+			active: false
 		};
 
 		// Gun (handheld gun, the slow one) that spawns on a random position on screen.
 		var gun = {
-		    x: random(totalWidth),
-		    y: random(totalHeight),
-		    active: false
+			x: random(totalWidth),
+			y: random(totalHeight),
+			active: false
 		}
 
 		// Rifle (assault rifle, the fast one) that spawns on a random position on screen.
 		var rifle = {
-		    x: random(totalWidth),
-		    y: random(totalHeight),
-		    active: false,
+			x: random(totalWidth),
+			y: random(totalHeight),
+			active: false,
 		}
 
 		// Last time the weapon was used.
@@ -223,296 +223,290 @@
 
 		function update() {
 
-		    shootGun();
+			shootGun();
 
-		    shootRifle();
+			shootRifle();
 
-		    // Reduces weapon cooldown by 1 second.z
-		    if (weaponCooldown > 0) {
-		        weaponCooldown--;
-		    }
+			// Reduces weapon cooldown by 1 second.z
+			if (weaponCooldown > 0) {
+				weaponCooldown--;
+			}
 
-		    // Checks if the player is dead.
-		    // If player's health is 0 or below (dead), the scream sounds plays and shows an alert to restart the game. By pressing ok or the enter key., you get sent back to the menu.
-		    if (playerHealth <= 0) {
-		        screamSound.play();
-		        window.location.href = "index.html";
-		        alert("You died! Press OK or enter to restart.");
-		        return;
-		    }
+			// Checks if the player is dead.
+			// If player's health is 0 or below (dead), the scream sounds plays and shows an alert to restart the game. By pressing ok or the enter key., you get sent back to the menu.
+			if (playerHealth <= 0) {
+				screamSound.play();
+				window.location.href = "index.html";
+				alert("You died! Press OK or enter to restart.");
+				return;
+			}
 
-		    // If there is no music playing, then it starts playing it.
-		    if (!themeMusic) {
-		        themeMusic = new Audio("./media/zombiesong.mp3");
-		        themeMusic.loop = true;
-		        themeMusic.play();
-		    }
+			// If there is no music playing, then it starts playing it.
+			if (!themeMusic) {
+				themeMusic = new Audio("./media/zombiesong.mp3");
+				themeMusic.loop = true;
+				themeMusic.play();
+			}
 
-		    clearScreen();
+			clearScreen();
 
-		    // Displays the player's points.
-		    text(10, 40, 25, "Points: " + points, "white")
+			// Displays the player's points.
+			text(10, 40, 25, "Points: " + points, "white")
 
-		    // Update player position via W, A, S, D keys. In other words, basic movement probably everyone has seen.
-		    if (keyDown("w")) {
-		        player.y -= player.speed;
-		    }
-		    if (keyDown("s")) {
-		        player.y += player.speed;
-		    }
-		    if (keyDown("a")) {
-		        player.x -= player.speed;
-		    }
-		    if (keyDown("d")) {
-		        player.x += player.speed;
-		    }
+			// Update player position via W, A, S, D keys. In other words, basic movement probably everyone has seen.
+			if (keyDown("w")) {
+				player.y -= player.speed;
+			}
+			if (keyDown("s")) {
+				player.y += player.speed;
+			}
+			if (keyDown("a")) {
+				player.x -= player.speed;
+			}
+			if (keyDown("d")) {
+				player.x += player.speed;
+			}
 
-		    // This loop iterates through the bullets array and draws each bullet on the screen.
-		    // Updates the bullets based on their xMovement.
-		    for (var i = 0; i < bullets.length; i++) {
-		        rectangle(bullets[i].x, bullets[i].y, bullets[i].size, bullets[i].size, bullets[i].color);
-		        bullets[i].x += bullets[i].xMovement;
-		    }
+			// This loop iterates through the bullets array and draws each bullet on the screen.
+			// Updates the bullets based on their xMovement.
+			for (var i = 0; i < bullets.length; i++) {
+				rectangle(bullets[i].x, bullets[i].y, bullets[i].size, bullets[i].size, bullets[i].color);
+				bullets[i].x += bullets[i].xMovement;
+			}
 
-		    // This checks if the player is close enough to the weapon, and if they are, the player equips the weapon
-		    if (distance(player, weapon) <= player.radius + 16 && !gun.active && !rifle.active) {
-		        weapon.active = true;
-		    }
+			// This checks if the player is close enough to the weapon, and if they are, the player equips the weapon
+			if (distance(player, weapon) <= player.radius + 16 && !gun.active && !rifle.active) {
+				weapon.active = true;
+			}
 
-		    // Same as before, but with the gun.
-		    if (distance(player, gun) <= player.radius + 16 && !weapon.active && !rifle.active && points >= 500) {
-		        gun.active = true;
-		    }
+			// Same as before, but with the gun.
+			if (distance(player, gun) <= player.radius + 16 && !weapon.active && !rifle.active && points >= 500) {
+				gun.active = true;
+			}
 
-		    // Same as before, but with the rifle.
-		    if (distance(player, rifle) <= player.radius + 16 && !gun.active && !weapon.active && points >= 1500) {
-		        rifle.active = true;
-		    }
+			// Same as before, but with the rifle.
+			if (distance(player, rifle) <= player.radius + 16 && !gun.active && !weapon.active && points >= 1500) {
+				rifle.active = true;
+			}
 
-		    // If the weapon is active, it's shown next to the player.
-		    if (weapon.active) {
-		        picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
-		    }
+			// If the weapon is active, it's shown next to the player.
+			if (weapon.active) {
+				picture(player.x + 80, player.y + 30, "./media/bat.png", 70, 70);
+			}
 
-		    // This displays the gun next to the player if it is active. Based on key is pressed (which was you're facing) it draws the correct image.
-		    // "Nug" is "gun" backwards, and the image is the same as the gun but mirrored. Clever, isn't it?
-		    else if (gun.active && gunPicture === "./media/gun.png") {
-		        picture(player.x + 100, player.y + 10, gunPicture, 70, 70);
-		    } else if (gun.active && gunPicture === "./media/nug.png") {
-		        picture(player.x - 75, player.y + 10, gunPicture, 70, 70);
-		    }
+			// This displays the gun next to the player if it is active. Based on key is pressed (which was you're facing) it draws the correct image.
+			// "Nug" is "gun" backwards, and the image is the same as the gun but mirrored. Clever, isn't it?
+			else if (gun.active && gunPicture === "./media/gun.png") {
+				picture(player.x + 100, player.y + 10, gunPicture, 70, 70);
+			} else if (gun.active && gunPicture === "./media/nug.png") {
+				picture(player.x - 75, player.y + 10, gunPicture, 70, 70);
+			}
 
-		    // Same as the gun, but with the rifle.
-		    else if (rifle.active && riflePicture === "./media/rifle.png") {
-		        picture(player.x + 110, player.y - 12, riflePicture, 100, 100);
-		    } else if (rifle.active && riflePicture === "./media/elfir.png") {
-		        picture(player.x - 110, player.y - 12, riflePicture, 100, 100);
-		    }
+			// Same as the gun, but with the rifle.
+			else if (rifle.active && riflePicture === "./media/rifle.png") {
+				picture(player.x + 110, player.y - 12, riflePicture, 100, 100);
+			} else if (rifle.active && riflePicture === "./media/elfir.png") {
+				picture(player.x - 110, player.y - 12, riflePicture, 100, 100);
+			}
 
-		    // Displays the player's image and health bar.
-		    picture(player.x, player.y, "./media/player.png", player.width, player.height);
-		    rectangle(player.x, player.y - 15, player.width, 10, "grey"); // Gray bar indicating the total health of the player
-		    rectangle(player.x, player.y - 15, player.width * (playerHealth / 100), 10, "purple"); // Purple bar indicating the current health of the player
-		    rectangle(((2 * player.x + player.width) / 2) - (player.width * bulletCooldown / 30), player.y + player.height + 15, 2 * (player.width * bulletCooldown / 30), 5, "blue"); // Blue bar indicating the bullet cooldown time of the player's weapon
-		    rectangle(((2 * player.x + player.width) / 2) - (player.width * weaponCooldown / 30), player.y + player.height + 15, 2 * (player.width * weaponCooldown / 30), 5, "blue"); // Blue bar indicating the weapon cooldown time of the player's weapon
+			// Displays the player's image and health bar.
+			picture(player.x, player.y, "./media/player.png", player.width, player.height);
+			rectangle(player.x, player.y - 15, player.width, 10, "grey"); // Gray bar indicating the total health of the player
+			rectangle(player.x, player.y - 15, player.width * (playerHealth / 100), 10, "purple"); // Purple bar indicating the current health of the player
+			rectangle(((2 * player.x + player.width) / 2) - (player.width * bulletCooldown / 30), player.y + player.height + 15, 2 * (player.width * bulletCooldown / 30), 5, "blue"); // Blue bar indicating the bullet cooldown time of the player's weapon
+			rectangle(((2 * player.x + player.width) / 2) - (player.width * weaponCooldown / 30), player.y + player.height + 15, 2 * (player.width * weaponCooldown / 30), 5, "blue"); // Blue bar indicating the weapon cooldown time of the player's weapon
 
-		    // If the weapon is not active, display the bat image at its location.
-		    if (!weapon.active) {
-		        picture(weapon.x, weapon.y, "./media/bat.png", 70, 70);
-		    }
+			// If the weapon is not active, display the bat image at its location.
+			if (!weapon.active) {
+				picture(weapon.x, weapon.y, "./media/bat.png", 70, 70);
+			}
 
-		    // If the gun is not active, and the player has enough points (being 500), display the gun image at its location.
-		    if (!gun.active && points >= 500) {
-		        picture(gun.x, gun.y, "./media/gun.png", 70, 70);
-		    }
+			// If the gun is not active, and the player has enough points (being 500), display the gun image at its location.
+			if (!gun.active && points >= 500) {
+				picture(gun.x, gun.y, "./media/gun.png", 70, 70);
+			}
 
-		    // Same as the gun, but with rifle. If the player has enough points (being 1500), display the rifle image at its location.
-		    if (!rifle.active && points >= 1500) {
-		        picture(rifle.x, rifle.y, "./media/rifle.png", 100, 100);
-		    }
+			// Same as the gun, but with rifle. If the player has enough points (being 1500), display the rifle image at its location.
+			if (!rifle.active && points >= 1500) {
+				picture(rifle.x, rifle.y, "./media/rifle.png", 100, 100);
+			}
 
-		    // If the player presses 'g' and the gun is active, the gun will be "dropped" (in other words deactivated) and it will move it to the player's location.
-		    if (keyboard.g && gun.active) {
-		        gun.active = false;
-		        gun.x = player.x + 80;
-		        gun.y = player.y + 30;
-		    }
+			// If the player presses 'g' and the gun is active, the gun will be "dropped" (in other words deactivated) and it will move it to the player's location.
+			if (keyboard.g && gun.active) {
+				gun.active = false;
+				gun.x = player.x + 80;
+				gun.y = player.y + 30;
+			}
 
-		    // Same as the gun, but with the rifle.
-		    if (keyboard.g && rifle.active) {
-		        rifle.active = false;
-		        rifle.x = player.x + 80;
-		        rifle.y = player.y + 30;
-		    }
+			// Same as the gun, but with the rifle.
+			if (keyboard.g && rifle.active) {
+				rifle.active = false;
+				rifle.x = player.x + 80;
+				rifle.y = player.y + 30;
+			}
 
-		    // Same as the gun, but with the weapon (bat/melee).
-		    if (keyboard.g && weapon.active) {
-		        weapon.active = false;
-		        weapon.x = player.x + 80;
-		        weapon.y = player.y + 30;
-		    }
+			// Same as the gun, but with the weapon (bat/melee).
+			if (keyboard.g && weapon.active) {
+				weapon.active = false;
+				weapon.x = player.x + 80;
+				weapon.y = player.y + 30;
+			}
 
-		    // Spawn medkit if it's not active and it's time to respawn.
-		    if (!medkit.active && playerHealth < 30) {
-		        medkit.x = random(totalWidth - medkit.size);
-		        medkit.y = random(totalHeight - medkit.size);
-		        medkit.active = true;
-		    }
+			// Spawn medkit if it's not active and it's time to respawn.
+			if (!medkit.active && playerHealth < 30) {
+				medkit.x = random(totalWidth - medkit.size);
+				medkit.y = random(totalHeight - medkit.size);
+				medkit.active = true;
+			}
 
-		    if (medkit.active) {
-		        // Draw the medkit image at the current location and size.
-		        picture(medkit.x, medkit.y, medkit.image, medkit.size, medkit.size);
+			if (medkit.active) {
+				// Draw the medkit image at the current location and size.
+				picture(medkit.x, medkit.y, medkit.image, medkit.size, medkit.size);
 
-		        // Check for collision with player.
-		        if (distance(player, medkit) <= player.radius + medkit.size / 2) {
-		            // Set medkit to inactive.
-		            medkit.active = false;
-		            // Update the round number when the medkit was picked up.
-		            medkit.lastPickedUpRound = roundNumber();
-		            // Restore player health to 100%.
-		            playerHealth = 100;
-		        }
-		    }
+				// Check for collision with player.
+				if (distance(player, medkit) <= player.radius + medkit.size / 2) {
+					// Set medkit to inactive.
+					medkit.active = false;
+					// Update the round number when the medkit was picked up.
+					medkit.lastPickedUpRound = roundNumber();
+					// Restore player health to 100%.
+					playerHealth = 100;
+				}
+			}
 
-		    // Update the zombies positions.
-		    for (var i = 0; i < zombies.length; i++) {
-		        var zombie = zombies[i];
+			// Update the zombies positions.
+			for (var i = 0; i < zombies.length; i++) {
+				var zombie = zombies[i];
 
-		        // Draw the zombie image at the current location and size.
-		        picture(zombie.x, zombie.y, "./media/zombie.png", zombie.width, zombie.height);
+				// Draw the zombie image at the current location and size.
+				picture(zombie.x, zombie.y, "./media/zombie.png", zombie.width, zombie.height);
 
-		        // Draw a health bar for the zombie.
-		        rectangle(zombie.x, zombie.y - 15, zombie.width, 5, "grey");
-		        rectangle(zombie.x, zombie.y - 15, zombie.width * (zombie.health / 100), 5, "red");
+				// Draw a health bar for the zombie.
+				rectangle(zombie.x, zombie.y - 15, zombie.width, 5, "grey");
+				rectangle(zombie.x, zombie.y - 15, zombie.width * (zombie.health / 100), 5, "red");
 
-		        // Update zombie position towards the player.
-		        if (zombie.x < player.x) {
-		            zombie.x += zombie.speed;
-		        } else {
-		            zombie.x -= zombie.speed;
-		        }
-		        if (zombie.y < player.y) {
-		            zombie.y += zombie.speed;
-		        } else {
-		            zombie.y -= zombie.speed;
-		        }
+				// Update zombie position towards the player.
+				if (zombie.x < player.x) {
+					zombie.x += zombie.speed;
+				} else {
+					zombie.x -= zombie.speed;
+				}
+				if (zombie.y < player.y) {
+					zombie.y += zombie.speed;
+				} else {
+					zombie.y -= zombie.speed;
+				}
 
-		        // Check if player health is zero or below. If it is, the game ends.
-		        if (playerHealth <= 0) {
-		            alert("Game Over");
-		            stopUpdate();
-		        }
-		    }
+				// Check if player health is zero or below. If it is, the game ends.
+				if (playerHealth <= 0) {
+					alert("Game Over");
+					stopUpdate();
+				}
+				// If a zombie's health is zero or below, remove it and add points.
+				if (zombie.health <= 0) {
+					zombies.splice(i, 1);
+					points += 10
+				}
 
-		    // Check for zombie deaths and player collisions.
-		    for (var i = 0; i < zombies.length; i++) {
-		        zombie = zombies[i];
+				// Checks for collisions between the player's shots (bullets) and the zombie.
+				shotCollisionDetection(zombie);
 
-		        // If a zombie's health is zero or below, remove it and add points.
-		        if (zombie.health <= 0) {
-		            zombies.splice(i, 1);
-		            points += 10
-		        }
+				// Checks for collision between player and zombie, reduces the player's health and plays the hurt sound.
+				if (distance(player, zombie) <= player.radius + zombie.radius) {
+					playerHealth -= 3;
+					hurtSound.play();
+				}
+			}
 
-		        // Checks for collisions between the player's shots (bullets) and the zombie.
-		        shotCollisionDetection(zombie);
+			// Checks if there are no zombies left.
+			if (zombies.length === 0) {
+				// Plays the wave complete sound effect.
+				var waveCompleteSound = new Audio("./media/wavecomplete.mp3");
+				waveCompleteSound.play();
 
-		        // Checks for collision between player and zombie, reduces the player's health and plays the hurt sound.
-		        if (distance(player, zombie) <= player.radius + zombie.radius) {
-		            playerHealth -= 3;
-		            hurtSound.play();
-		        }
-		    }
+				// Increase wave number by 1, but only up to wave 5.
+				if (wave < 5)
+					wave += 1;
 
-		    // Checks if there are no zombies left.
-		    if (zombies.length === 0) {
-		        // Plays the wave complete sound effect.
-		        var waveCompleteSound = new Audio("./media/wavecomplete.mp3");
-		        waveCompleteSound.play();
+				// Adds 100 points to the overall score.
+				points += 100;
 
-		        // Increase wave number by 1, but only up to wave 5.
-		        if (wave < 5)
-		            wave += 1;
+				// Spawns 5 more zombies for each wave that has passed.
+				for (var i = 0; i < (5 + wave); i++) {
+					zombies.push({
+						// Sets the zombie's properties.
+						x: random(totalWidth),
+						y: random(totalHeight),
+						speed: random(3, 7),
+						radius: 35,
+						width: 32 * 3,
+						height: 32 * 3,
+						health: 100
+					});
+				}
+			}
 
-		        // Adds 100 points to the overall score.
-		        points += 100;
+			// Ensures that the player stays within the screen boundaries.
+			if (player.x <= 0) {
+				player.x = 0
+			}
 
-		        // Spawns 5 more zombies for each wave that has passed.
-		        for (var i = 0; i < (5 + wave); i++) {
-		            zombies.push({
-		                // Sets the zombie's properties.
-		                x: random(totalWidth),
-		                y: random(totalHeight),
-		                speed: random(3, 7),
-		                radius: 35,
-		                width: 32 * 3,
-		                height: 32 * 3,
-		                health: 100
-		            });
-		        }
-		    }
+			if (player.x + 70 >= screen.width) {
+				player.x = screen.width - 70
+			}
 
-		    // Ensures that the player stays within the screen boundaries.
-		    if (player.x <= 0) {
-		        player.x = 0
-		    }
+			if (player.y <= 0) {
+				player.y = 0
+			}
 
-		    if (player.x + 70 >= screen.width) {
-		        player.x = screen.width - 70
-		    }
+			if (player.y + 70 >= screen.height) {
+				player.y = screen.height - 70
+			}
 
-		    if (player.y <= 0) {
-		        player.y = 0
-		    }
+			// Check if the space key is pressed and the weapon is ready to be used.
+			if (weapon.active && keyDown(" ") && weaponCooldown === 0) {
+				// Set the last used time to the current time.
+				weaponCooldown = 30;
 
-		    if (player.y + 70 >= screen.height) {
-		        player.y = screen.height - 70
-		    }
-
-		    // Check if the space key is pressed and the weapon is ready to be used.
-		    if (weapon.active && keyDown(" ") && weaponCooldown === 0) {
-		        // Set the last used time to the current time.
-		        weaponCooldown = 30;
-
-		        // Check for collisions between the weapon and zombies.
-		        for (var i = 0; i < zombies.length; i++) {
-		            var zombie = zombies[i];
+				// Check for collisions between the weapon and zombies.
+				for (var i = 0; i < zombies.length; i++) {
+					var zombie = zombies[i];
 
 
-		            // Checks if the distance between the player and zombie is less than or equal to the sum of their radiuses plus 120.
-		            if (distance(player, zombie) <= player.radius + zombie.radius + 120) {
+					// Checks if the distance between the player and zombie is less than or equal to the sum of their radiuses plus 120.
+					if (distance(player, zombie) <= player.radius + zombie.radius + 120) {
 
-		                // Reduces the health of the zombie.
-		                zombie.health -= 50;
+						// Reduces the health of the zombie.
+						zombie.health -= 50;
 
-		                // Plays the sound effect of zombie being killed.
-		                var splatSound = new Audio("./media/splat.mp3");
-		                splatSound.play();
+						// Plays the sound effect of zombie being killed.
+						var splatSound = new Audio("./media/splat.mp3");
+						splatSound.play();
 
-		                // Increases the player's points by 5.
-		                points += 5;
+						// Increases the player's points by 5.
+						points += 5;
 
-		                // If a medkit is active, shows its image at its position.
-		                if (medkit.active) {
-		                    picture(medkit.x, medkit.y, medkit.image, medkit.size, medkit.size);
-		                }
-		            }
-		        }
-		    }
+						// If a medkit is active, shows its image at its position.
+						if (medkit.active) {
+							picture(medkit.x, medkit.y, medkit.image, medkit.size, medkit.size);
+						}
+					}
+				}
+			}
 
 		}
 
 		// Calculates the distance between two objects using their positions.
 		function distance(obj1, obj2) {
-		    var dx = obj1.x - obj2.x;
-		    var dy = obj1.y - obj2.y;
-		    var distance = Math.sqrt(dx * dx + dy * dy);
-		    return distance;
+			var dx = obj1.x - obj2.x;
+			var dy = obj1.y - obj2.y;
+			var distance = Math.sqrt(dx * dx + dy * dy);
+			return distance;
 		}
 
 		// Rounds the points down to the nearest multiple of 10.
 		function roundNumber() {
-		    return Math.floor(points / 10);
+			return Math.floor(points / 10);
 		}
 	</script>
 </body>

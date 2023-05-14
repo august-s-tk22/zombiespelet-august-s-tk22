@@ -10,7 +10,7 @@ a:link {
 
 a:visited {
     text-decoration: none;
-    color: white; 
+    color: white;
 }
 
 a:hover {
@@ -22,11 +22,11 @@ a:active {
 }
 
 .play-button-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
 .img-logo {
@@ -34,22 +34,22 @@ a:active {
 }
 
 .play-button {
-	background-image: linear-gradient(to right, #308729 0%, #359422  51%, #41bf38  100%);
-	color: white;
-	font-size: 100px;
-    font:600;
-	padding: 50px 100px;
-	border: none;
-	border-radius: 25px;
+    background-image: linear-gradient(to right, #308729 0%, #359422 51%, #41bf38 100%);
+    color: white;
+    font-size: 100px;
+    font: 600;
+    padding: 50px 100px;
+    border: none;
+    border-radius: 25px;
     border-style: solid;
-	cursor: pointer;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .play-button:hover {
-	background-image: linear-gradient(to right, #3da935 0%, #42b72b  51%, #54f748  100%);
-} 
+    background-image: linear-gradient(to right, #3da935 0%, #42b72b 51%, #54f748 100%);
+}
 
 .back-button-container {
     position: fixed;
@@ -57,21 +57,21 @@ a:active {
     right: 10px;
     z-index: 1;
 }
-  
+
 .back-button {
     display: inline-block;
     padding: 10px 20px;
-	background-image: linear-gradient(to right, #308729 0%, #359422  51%, #41bf38  100%);
+    background-image: linear-gradient(to right, #308729 0%, #359422 51%, #41bf38 100%);
     color: white;
     border-radius: 5px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     border-style: solid;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-  
+
 .back-button:hover {
-	background-image: linear-gradient(to right, #3da935 0%, #42b72b  51%, #54f748  100%);
-}  
+    background-image: linear-gradient(to right, #3da935 0%, #42b72b 51%, #54f748 100%);
+}
 
 .container-gallery {
     position: fixed;
@@ -79,22 +79,22 @@ a:active {
     margin: 20px;
     width: 300px;
     height: 90%;
-	background-image: linear-gradient(to right, #4d2987 0%, #372294  51%, #2b3979  100%);
+    background-image: linear-gradient(to right, #4d2987 0%, #372294 51%, #2b3979 100%);
     border-style: solid;
     border-color: white;
     border-radius: 5px;
     color: white;
     padding: 20px;
     text-align: center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-  
+
 .image-container-gallery {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-  
+
 .img-gallery {
     width: 100%;
     height: 90%;
@@ -109,22 +109,22 @@ a:active {
     margin: 20px;
     width: 300px;
     height: 90%;
-	background-image: linear-gradient(to bottom, #397a4c 0%, #355f5a  51%, #32516d  100%);
+    background-image: linear-gradient(to bottom, #397a4c 0%, #355f5a 51%, #32516d 100%);
     border-style: solid;
     border-color: white;
     border-radius: 5px;
     color: white;
     padding: 20px;
     text-align: center;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-  
+
 .text-container-instructions {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-  
+
 .text-instructions {
     width: 100%;
     height: 90%;
@@ -132,5 +132,5 @@ a:active {
     border-color: white;
     border-radius: 5px;
     margin-bottom: 10px;
-    background-image: linear-gradient(to bottom, #374c52  51%, #435763  100%);
+    background-image: linear-gradient(to bottom, #374c52 51%, #435763 100%);
 }
