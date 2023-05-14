@@ -237,7 +237,7 @@
 			if (playerHealth <= 0) {
 				screamSound.play();
 				window.location.href = "index.html";
-				alert("You died! Press OK or enter to restart.");
+				alert("You died! Press OK or 'enter' to restart.");
 				return;
 			}
 
@@ -397,11 +397,6 @@
 					zombie.y -= zombie.speed;
 				}
 
-				// Check if player health is zero or below. If it is, the game ends.
-				if (playerHealth <= 0) {
-					alert("Game Over");
-					stopUpdate();
-				}
 				// If a zombie's health is zero or below, remove it and add points.
 				if (zombie.health <= 0) {
 					zombies.splice(i, 1);
