@@ -284,7 +284,7 @@
 			}
 
 			if (!rifle.active) {
-				picture(rifle.x, rifle.y, "./media/rifle.png", 70, 70);
+				picture(rifle.x, rifle.y, "./media/rifle.png", 100, 100);
 			}
 
 			if (keyboard.g && gun.active) {
@@ -306,7 +306,7 @@
 			}
 
 			// Spawn medkit if it's not active and it's time to respawn
-			if (!medkit.active && points===100) {
+			if (!medkit.active && playerHealth < 30) {
 				medkit.x = random(totalWidth - medkit.size);
 				medkit.y = random(totalHeight - medkit.size);
 				medkit.active = true;
@@ -349,6 +349,7 @@
 				zombie = zombies[i];
 				if (zombie.health <= 0) {
 					zombies.splice(i, 1);
+					points += 10
 				}
 				shotCollisionDetection(zombie)
 				if (distance(player, zombie) <= player.radius + zombie.radius) {
@@ -381,6 +382,21 @@
 				}
 			}
 
+			if (player.x <= 0) {
+				player.x = 0
+			}
+
+			if (player.x + 70 >= screen.width) {
+				player.x = screen.width - 70
+			}
+
+			if (player.y <= 0) {
+				player.y = 0
+			}
+
+			if (player.y + 70 >= screen.height) {
+				player.y = screen.height - 70
+			}
 
 			// Check if space key is pressed and weapon is ready to be used
 			if (weapon.active && keyDown(" ") && weaponCooldown === 0) {
@@ -403,7 +419,7 @@
 						splatSound.play();
 
 						// Add 10 points
-						points += 10;
+						points += 5;
 
 						// Get the bloodsplat image element and fade it in
 						console
