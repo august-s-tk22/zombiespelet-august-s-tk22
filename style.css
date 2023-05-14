@@ -29,8 +29,8 @@ a:active {
 	height: 100vh;
 }
 
-img {
-	margin-bottom: 50px;
+.img-logo {
+    margin-bottom: 80px;
 }
 
 .play-button {
@@ -72,3 +72,65 @@ img {
 .back-button:hover {
 	background-image: linear-gradient(to right, #3da935 0%, #42b72b  51%, #54f748  100%);
 }  
+
+.container-gallery {
+    position: fixed;
+    right: 0;
+    margin: 20px;
+    width: 300px;
+    height: 90%;
+	background-image: linear-gradient(to right, #4d2987 0%, #372294  51%, #2b3979  100%);
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+  
+.image-container-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+  
+.img-gallery {
+    width: 100%;
+    height: 90%;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+}
+
+.container-instructions {
+    position: fixed;
+    left: 0;
+    margin: 20px;
+    width: 300px;
+    height: 90%;
+	background-image: linear-gradient(to bottom, #397a4c 0%, #355f5a  51%, #32516d  100%);
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+  
+.text-container-instructions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+  
+.text-instructions {
+    width: 100%;
+    height: 90%;
+    border-style: solid;
+    border-color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(to bottom, #374c52  51%, #435763  100%);
+}

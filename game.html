@@ -279,11 +279,11 @@
 				picture(weapon.x, weapon.y, "./media/bat.png", 70, 70);
 			}
 
-			if (!gun.active) {
+			if (!gun.active && points >= 500) {
 				picture(gun.x, gun.y, "./media/gun.png", 70, 70);
 			}
 
-			if (!rifle.active) {
+			if (!rifle.active && points >= 2000) {
 				picture(rifle.x, rifle.y, "./media/rifle.png", 100, 100);
 			}
 
