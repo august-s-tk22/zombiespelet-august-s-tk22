@@ -244,11 +244,11 @@
 				weapon.active = true;
 			}
 
-			if (distance(player, gun) <= player.radius + 16 && !weapon.active && !rifle.active) {
+			if (distance(player, gun) <= player.radius + 16 && !weapon.active && !rifle.active && points >= 500) {
 				gun.active = true;
 			}
 
-			if (distance(player, rifle) <= player.radius + 16 && !gun.active && !weapon.active) {
+			if (distance(player, rifle) <= player.radius + 16 && !gun.active && !weapon.active && points >= 1500) {
 				rifle.active = true;
 			}
 
@@ -283,7 +283,7 @@
 				picture(gun.x, gun.y, "./media/gun.png", 70, 70);
 			}
 
-			if (!rifle.active && points >= 2000) {
+			if (!rifle.active && points >= 1500) {
 				picture(rifle.x, rifle.y, "./media/rifle.png", 100, 100);
 			}
 
